@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4b831092-8842-4346-8742-333ca6befdaf" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>apply_id</find>
+      <find>docToPDF</find>
+      <find>excelToPDF</find>
+      <find>file_doc_pdf</find>
+      <find>file_xls_pdf</find>
+      <find>enc_file_doc</find>
+      <find>text_doc_pdf</find>
+      <find>toReport_main</find>
+      <find>40</find>
+      <find>md5_text_doc</find>
+      <find>key</find>
+      <find>zzs_fpkj.txt</find>
+      <find>pdf</find>
+      <find>zzs</find>
+      <find>charset</find>
+      <find>pandas</find>
+      <find>lineBreak</find>
+      <find>process</find>
+      <find>2</find>
+      <find>ent_nodata</find>
+      <find>entScore.txt</find>
+      <find>all_analysis</find>
+      <find>report_main</find>
+      <find>l1_all_list</find>
+      <find>l3_</find>
+      <find>file_pre</find>
+      <find>pd</find>
+      <find>file_preprocess</find>
+      <find>nodata</find>
+      <find>input sales data......</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="D:/微信下载文件/WeChat Files/zyj15038707637/FileStorage/File/2019-06/data_input(4).py" />
+        <option value="D:/微信下载文件/WeChat Files/zyj15038707637/FileStorage/File/2019-06/once_input(4).py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0076b3/Bv004840/toReport.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0076b3/Bv004a43/toReport.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0018c7/Bv0018c7/test.py" />
+        <option value="$PROJECT_DIR$/toReport.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv00702b/toReport.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv000000/aes_encrypt.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001476/report_output.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv002584/test.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0027c3/test.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001a44/report_output.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv003fdc/aes_encrypt.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0044fc/aes_encrypt.py" />
+        <option value="$PROJECT_DIR$/aes_encrypt.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv000c07/Bv000c1e/test.py" />
+        <option value="$PROJECT_DIR$/once_input.py" />
+        <option value="$USER_HOME$/Desktop/test.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0010e5/Bv0010e5/data_input.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0010e5/Bv001fcb/once_input.py" />
+        <option value="$PROJECT_DIR$/report_output.py" />
+        <option value="$PROJECT_DIR$/data_input.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv001817/data_input.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv003322/test.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv0014c6/once_input.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv000965/Bv004ff6/test.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006544/once_input.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv0065b6/data_input.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="871" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="second_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="second_test" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../third_test" />
+    <property name="settings.editor.selected.configurable" value="debugger.stepping" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="second_test" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="second_test" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.test">
+    <configuration name="report_output (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="second_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\python3.6\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001476" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001476/report_output.py" />
+      <option name="PARAMETERS" value="2 91530103695678546A" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="report_output" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="second_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/report_output.py" />
+      <option name="PARAMETERS" value="2 91530103695678546A" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="second_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv002584" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv002584/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test (3)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="second_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0027c3" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0027c3/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="second_test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.report_output" />
+      <item itemvalue="Python.report_output (1)" />
+      <item itemvalue="Python.test (2)" />
+      <item itemvalue="Python.test (3)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.test (3)" />
+        <item itemvalue="Python.test (2)" />
+        <item itemvalue="Python.report_output (1)" />
+        <item itemvalue="Python.report_output" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\pc\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4b831092-8842-4346-8742-333ca6befdaf" name="Default Changelist" comment="" />
+      <created>1561094054865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561094054865</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17475729" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32851985" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22924188" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3298611" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.21841155" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="调试" order="11" weight="0.32851985" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17475729" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32851985" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.31407943" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3298611" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.21841155" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="调试" order="11" weight="0.32851985" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://D:/微信下载文件/WeChat Files/zyj15038707637/FileStorage/File/2019-06/data_input(4).py</url>
+          <line>849</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://D:/微信下载文件/WeChat Files/zyj15038707637/FileStorage/File/2019-06/once_input(4).py</url>
+          <line>742</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0018c7/Bv0018c7/test.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0076b3/Bv004f2d/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0076b3/Bv004a43/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0076b3/Bv004ff7/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv004e00/Bv00579b/data_input.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv004e00/Bv0057ae/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002d1c/Bv00315b/once_input.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005f6a/Bv005f6a/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005f6a/Bv0071f6/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002fec/Bv000a77/test.py" />
+    <entry file="file://$PROJECT_DIR$/../test.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002fec/Bv000bde/test.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002fec/Bv007db9/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002fec/Bv007d9f/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv002fec/Bv00117b/test.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0018c7/Bv0018c7/test.py" />
+    <entry file="file://D:/python3.6/Lib/shutil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv006f19/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv00702b/toReport.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv000c53/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001476/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv000000/aes_encrypt.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv002584/test.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0027c3/test.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv003fdc/aes_encrypt.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv0044fc/aes_encrypt.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv005efd/Bv001a44/report_output.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv000c07/Bv000c1e/test.py" />
+    <entry file="file://D:/python3.6/Lib/site-packages/pymysql/converters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="101" column="4" selection-start-line="101" selection-start-column="4" selection-end-line="101" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/python3.6/Lib/site-packages/pandas/core/ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="144" lean-forward="true" selection-start-line="144" selection-end-line="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/test.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0010e5/Bv0010e5/data_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="26" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0010e5/Bv001fcb/once_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aes_encrypt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1481">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="10" selection-end-line="51" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv0010e5/Bv00391c/toReport.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="1090" column="27" lean-forward="true" selection-start-line="1090" selection-start-column="27" selection-end-line="1090" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="19" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv001817/data_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv001454/toReport.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv000965/Bv004ff6/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="625">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv003322/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+          <folding>
+            <element signature="e#23#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv0014c6/once_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="26" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toReport.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="1025" column="26" selection-start-line="1025" selection-start-column="22" selection-end-line="1025" selection-end-column="26" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006544/once_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="25" column="41" lean-forward="true" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv0065b6/data_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv0065ac/data_input.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006aee/once_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/once_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="619" column="19" selection-start-line="619" selection-start-column="19" selection-end-line="619" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+          <folding>
+            <element signature="e#24#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006e32/log_py.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006df7/aes_encrypt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/BvSshSftp/Bv001454/Bv006d8b/risk_report.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
