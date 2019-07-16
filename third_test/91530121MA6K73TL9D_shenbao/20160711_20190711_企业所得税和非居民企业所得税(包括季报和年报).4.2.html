@@ -1,0 +1,551 @@
+﻿<!DOCTYPE HTML>
+
+
+
+<META http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../css/print.css" type="text/css">
+<link rel="stylesheet" href="../css/wssb.css" type="text/css">
+<meta http-equiv="Content-Language" content="GBK">
+<meta http-equiv="content-type" content="text/html; charset=GBK">
+
+
+
+<html>
+<head>
+<title>不征税收入和税基类减免应纳税所得额明细表</title>
+
+<script language="javascript">
+window.onerror = handle_error;
+
+function handle_error(message, url, line){
+	return true;
+}
+
+
+function isreal(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function convert(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function IsNumber(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if(string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false;
+	}
+	if(i_blank==0) {
+		return false;
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false; 
+	}
+	else {
+		return true; 
+	}
+}
+function IsDate(string)
+{
+ var b_rtn=true;
+ var i_ln;
+ var sub_rq;  
+ var str_rq;
+  if(string.length!=8)
+ {
+   return false;
+ }
+ for(var i=0;i<8;i++)
+ {
+   sub_rq=string.substring(i,i+1);
+   str_rq=String(sub_rq);
+   if(!IsNumber(str_rq))
+   {
+    b_rtn=false;
+    return b_rtn;
+   }
+ }
+ var sub_mm1=string.substring(4,6);
+ var sub_day1=string.substring(6,8);
+ 
+ var sub_mm=parseInt(sub_mm1,10);
+ var sub_day=parseInt(sub_day1,10);
+ if(sub_mm<1||sub_mm>12)
+  {
+    b_rtn=false;
+    return b_rtn;
+   }
+ if(sub_day<1||sub_day>31)
+  {
+    b_rtn=false;
+    return b_rtn;
+  }
+
+  return b_rtn;
+}
+function IsInt(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if (string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false; 
+	}
+	if(i_blank==0) {
+		return false; 
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false;
+	}
+	else {
+		if(number>=0) {
+			var dotlst=string.indexOf(".");
+			if(dotlst==-1) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+function enterdown (column) {
+	try{
+		var columnobject =column;
+		var obj = document.form1.elements[columnobject];
+		if (event.keyCode==13 && (obj!=null)) {
+			if ((obj.type=="text") && (!obj.disabled)) {
+				obj.focus();
+				obj.select();
+			}
+		}
+	}catch(e){
+	}
+}
+
+function changSE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	}	
+}
+
+function changJE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	  JEcol.value="0.00";
+	}	
+}
+//?é?¤String??????????????×?·?
+function checkString(str)
+{
+	var reStr = /[???????·????<<>>&??]/;
+	var str1=str.value
+	if(str1.match(reStr))
+	{
+		alert('×?·?????????????<,>,&??????×?·???');
+		str.value="";
+		return false;
+	}
+	else
+	{
+		//alert('×?·???·??????ó??');
+		return true;
+	}
+}
+
+String.prototype.trim = function() { 
+return this.replace(/(^\s*)|(\s*$)/g, ""); 
+} 
+ 
+String.prototype.ltrim = function() { 
+return this.replace(/(^\s*)/g, ""); 
+} 
+ 
+String.prototype.rtrim = function() { 
+return this.replace(/(\s*$)/g, ""); 
+} 
+
+</script>
+<script type="text/javascript" src="../jquery1.5/jquery-1.5.2.min.js"></script>
+<body marginwidth="0" marginheight="0"  topmargin="0" >
+<OBJECT  id="factory" style="DISPLAY:  none"  codeBase="../ScriptX.cab#Version=5,60,0,360"  classid="clsid:1663ed61-23eb-11d2-b92f-008048fdd814"  viewastext></OBJECT>
+<object id="button" style="DISPLAY:  none" classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></object>
+<script language="JavaScript">
+function doprint() {
+  factory.printing.header = ""
+  factory.printing.footer = ""
+  factory.printing.leftMargin  =  0
+  factory.printing.topMargin  =  0
+  factory.printing.rightMargin  =  0
+  factory.printing.bottomMargin  =  0
+  factory.printing.portrait = false
+  document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+  factory.printing.Print(false);
+  document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+ }
+ function printsetup(){ 
+　　// 打印页面设置 
+　　factory.printing.PageSetup(); 
+　　} 
+ function printpreview(){ 
+　　// 打印页面预览
+    factory.printing.header = ""
+    factory.printing.footer = ""
+    factory.printing.leftMargin  =  0
+    factory.printing.topMargin  =  0
+    factory.printing.rightMargin  =  0
+    factory.printing.bottomMargin  =  0
+    factory.printing.portrait = false
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+　　factory.printing.Preview();
+    document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function saveas(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　document.all.button.ExecWB(4,1);
+    //document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function hide(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　//document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+ var SF=1,SF1=0.1,Max=3;
+</script>
+<div id="printbtn" align="center" style="DISPLAY:">
+<INPUT  type="button" name="Button" value="放大" onClick="if(SF<Max){SF+=SF1;MyDiv.style.zoom=SF;}"  align="middle">
+<INPUT onClick="if(SF>SF1){SF-=SF1;MyDiv.style.zoom=SF;}" type="button" name="Button" value="缩小" align="middle"> 
+<INPUT onclick=javascript:doprint() type="button" name="Button" value="打印" align="middle">
+<INPUT onclick=javascript:printsetup(); type="button" name="Button" value="打印设置" align="middle"> 
+<INPUT onclick=javascript:printpreview(); type="button" name="Button" value="打印预览" align="middle">
+<!--<input type="button" name="Button" value="另存为" onClick="javascript:saveas()">   --> 
+<input type="button" name="Button" value="隐藏" onClick="javascript:hide()"> 
+</div>
+<Div id="MyDiv"> 
+</head>
+
+ 
+<body onLoad="init()">
+<form name="form1" method="POST">
+
+
+<table width="780" border="0" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1" >
+  <tr >
+    <td   colspan="6" ><div class="mypop2" align="center"><b>中华人民共和国企业所得税月(季)度预缴纳税申报表(A类，2015年版)附表1 </b></div></td>
+  </tr>
+  <tr >
+    <td   colspan="6" ><div class="mypop2" align="center"><b>不征税收入和税基类减免应纳税所得额明细表 </b></div></td>
+  </tr>
+  <tr >
+    <td   colspan="6" align="right" ><p >金额单位:&nbsp;&nbsp;&nbsp;人民币元(列至角分) </p></td>
+  </tr>
+  </table>
+ <table width="800" border="1" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1"   id="tabList" >
+  <tr >
+    <td width="50" align="center"  ><p >行次 </p></td>
+    <td colspan="3" align="center" ><p >项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目 </p></td>
+    <td width="94" align="center"  ><p >本期金额 </p></td>
+    <td width="98" align="center"  ><p >累计金额 </p></td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >1 </p></td>
+    <td  colspan="3"><p >合计(2行+3行+14行+19行+30行+31行+32行+33行+34行...) </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >2 </p></td>
+    <td  colspan="3" ><p >一、不征税收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >3 </p></td>
+    <td  colspan="3" ><p >二、免税收入(4行+5行+....+13行) </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >4 </p></td>
+    <td  colspan="3"><p >&nbsp;&nbsp;&nbsp;&nbsp;1.国债利息收入</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >5 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;2.地方政府债券利息收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >6 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;3.符合条件的居民企业之间的股息、红利等权益性投资收益 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >7 </p></td>
+    <td  colspan="3"><p >&nbsp;&nbsp;&nbsp;&nbsp;4.符合条件的非营利组织的收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >8 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;5.证券投资基金投资者取得的免税收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >9 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;6.证券投资基金管理人取得的免税收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >10 </p></td>
+    <td  colspan="3"><p >&nbsp;&nbsp;&nbsp;&nbsp;7.中国清洁发展机制基金取得的收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >11 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;8.受灾地区企业取得的救灾和灾后恢复重建款项等收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >12 </p></td>
+    <td width="100" >&nbsp;&nbsp;&nbsp;&nbsp;9.其他1：</td>
+    <td colspan="2" width="200">&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >13 </p></td>
+    <td width="100" >&nbsp;&nbsp;&nbsp;&nbsp;10.其他2：</td>
+    <td colspan="2">&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >14 </p></td>
+    <td  colspan="3" ><p >三、减计收入(15行+16行+17行+18行) </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >15 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;1.综合利用资源生产产品取得的收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >16 </p></td>
+    <td   colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;2.金融、保险等机构取得的涉农利息、保费收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >17 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;3.取得的中国铁路建设债券利息收入 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >18 </p></td>
+    <td width="100" ><p >&nbsp;&nbsp;&nbsp;&nbsp;4.其他： </p></td>
+    <td colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >19 </p></td>
+    <td   colspan="3" ><p >四、所得减免(20行+23行+24行+25行+26行+27行+28行+29行) </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >20 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;1.农、林、牧、渔业项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >21 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;其中：免税项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >22 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;减半征收项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >23 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;2.国家重点扶持的公共基础设施项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >24 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;3.符合条件的环境保护、节能节水项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >25 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;4.符合条件的技术转让项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >26 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;5.实施清洁发展机制项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >27 </p></td>
+    <td  colspan="3" ><p >&nbsp;&nbsp;&nbsp;&nbsp;6.节能服务公司实施合同能源管理项目 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >28 </p></td>
+    <td width="100"  ><p >&nbsp;&nbsp;&nbsp;&nbsp;7.其他1： </p></td>
+    <td  colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >29 </p></td>
+    <td width="100"  ><p >&nbsp;&nbsp;&nbsp;&nbsp;8.其他2： </p></td>
+    <td  colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >30 </p></td>
+    <td  colspan="3" ><p >五、新产品、新工艺、新技术研发费用加计扣除 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >31 </p></td>
+    <td  colspan="3" ><p >六、抵扣应纳税所得额 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >32 </p></td>
+    <td width="309" ><p >七、其他1： </p></td>
+    <td colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >33 </p></td>
+    <td width="100"  ><p >&nbsp;&nbsp;&nbsp;&nbsp;其他2： </p></td>
+    <td  colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >34 </p></td>
+    <td width="100"  >&nbsp;&nbsp;&nbsp;&nbsp;其他3：</td>
+    <td colspan="2" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	
+  </tr>
+    
+</table>
+ 
+  </div>
+</form>
+</body>
+</html>
+  

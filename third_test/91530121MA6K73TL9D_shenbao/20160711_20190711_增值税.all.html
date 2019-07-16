@@ -1,0 +1,269 @@
+﻿
+  
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>数据查询</title>
+<link href="../css/zj.css" rel="stylesheet" type="text/css" />
+<style  type="text/css">
+ .menu-li-height{
+height:28px;
+}
+</style>
+</head>
+<script type="text/javascript">
+function warn()
+{
+    alert("该功能正在建设中");
+}
+function get_XHR(){
+var xmlHttp;
+try{
+    xmlHttp=new XMLHttpRequest();
+
+}catch(e){
+    try{
+         xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");   
+        }catch(e){
+		
+         try{ 
+	         xmlHttp=new ActiveXObject("Microsoft.XMLHTTP"); 	 	 
+	          }catch(e){
+	          alert("你的浏览器不支持ajax");
+	          return false;	 
+	    }        
+   }
+}
+ return xmlHttp;
+}
+
+function fhsy(){
+var nsrdzdah=document.getElementById("nsrdzdah").value;
+var ipdz=document.getElementById("ipdz").value;
+//alert(nsrdzdah+ipdz);
+var xhr=get_XHR();
+     xhr.onreadystatechange=function(){
+	 if(xhr.readyState==4){
+	    if(xhr.status==200){		   
+		   //alert(xhr.responseText);	
+		   var djxh=xhr.responseText;
+		   if(djxh=="123"){
+		   //失效时跳转
+		   }else{
+		   ipdz=ipdz+"?djxh="+djxh;
+		   }
+		window.location.href=ipdz;
+		   }	 
+	    }	 	 
+	 }
+xhr.open("GET","../get_ipdz.jsp?nsrdzdah="+nsrdzdah+"&ipdz="+ipdz+"&ran="+new Date().getTime());
+xhr.send();
+}
+</script>
+<script src="../jquery1.5/jquery-1.7.2.min.js"></script>
+<script src="../zkpub.js"></script>
+<body LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
+
+ <input type="hidden" id="nsrdzdah" name="nsrdzdah" value="10115301010000083405">
+ <input type="hidden" id="ipdz" name="ipdz" value="">
+
+<!--
+<div class="menu-div" >
+<div  class="menu-div-li menu-li-height" >
+	<ul> 
+        <li><a href="sb_ysbcx.jsp" >申报信息</a></li>
+        <li><a href="sb_yzscx.jsp">征收信息</a></li>
+        <li><a href="sb_dzjkpz.jsp" >电子缴款凭证</a></li>
+</ul>
+</div>
+</div>
+-->
+</body>
+</html>
+
+
+<html>
+
+<title>纳税人历史申报信息查询结果</title>
+<link href="../css/wssb.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<form name="xform">
+
+ 
+    
+ <table border="0" width="70%" align="center">
+  <tr>
+    <td width="100%" colspan="3">
+      <div align="center", class="mypup"><b>纳税人历史申报信息</b></div> </td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="3"> <br><br></td> 
+  </tr>
+  <tr class="pup1">
+    <td width="40%"><b>纳税人识别号：91530121MA6K73TL9D</b> </td>
+    <td width="60%"><b>云南长青安茶业有限公司</b></td>
+   </tr>
+</table>
+<!--
+<table border="1" width="80%" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1">
+<table border="1" width="80%" cellspacing="0" cellpadding="0" bordercolorlight="#193682" bordercolordark="#dfdfdf" align="center" class="unnamed1">
+  <tr>
+    <td width="5%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>序号</b></div></td>
+    <td width="20%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>征收项目</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>申报日期</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>所属时期起</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>所属时期止</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>应纳税额</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>　</b></div></td>
+  </tr>
+  <tr>
+    <td width="10%" align="center"><div align="center", class="mypop">test</div></td>
+    <td width="20%" align="center"><div align="center", class="mypop">test</div></td>
+    <td width="15%" align="center"><div align="center", class="mypop">test</div></td>
+    <td width="15%" align="center"><div align="center", class="mypop">test</div></td>
+    <td width="15%" align="center"><div align="center", class="mypop">test</div></td>
+    <td width="25%" align="right" ><div align="right", class="mypop">test</div></td>
+     <td width="25%" align="right" ><div align="right", class="mypop">test</div></td>
+  </tr>
+  <tr>
+    <td width="10%" align="center"><div align="center">test</div></td>
+    <td width="20%" align="center"><div align="center">test</div></td>
+    <td width="15%" align="center"><div align="center">test</div></td>
+    <td width="15%" align="center"><div align="center">test</div></td>
+    <td width="15%" align="center"><div align="center">test</div></td>
+    <td width="25%" align="right" ><div align="right">test</div></td>
+     <td width="25%" align="right" ><div align="right">test</div></td>
+  </tr>
+  </table>
+-->
+<table border="1" width="70%" cellspacing="0" cellpadding="0" bordercolorlight="#193682" bordercolordark="#dfdfdf" align="center" class="unnamed1">
+  <tr>
+    <td width="5%" align="center" bgcolor="#69B3F1" height="25"><div align="center", class="pup1"><b>序号</b></div></td>
+    <td width="25%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>征收项目</b></div></td>
+    <td width="12%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>申报日期</b></div></td>
+    <td width="12%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>所属时期起</b></div></td>
+    <td width="12%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>所属时期止</b></div></td>
+    <td width="12%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>应纳税额</b></div></td>
+    <td width="15%" align="center" bgcolor="#69B3F1"><div align="center", class="pup1"><b>　</b></div></td>
+  </tr>
+ 
+
+  <tr class="list-head-bg">
+  <input type="hidden" id="xx" value="2016-10-01======">
+    <td width="5%" align="center" height="25"><div align="center">1</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2017-01-03　</div></td>
+    <td width="12%" align="center" ><div align="center">2016-10-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2016-12-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=0"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="">
+  <input type="hidden" id="xx" value="2017-01-01======">
+    <td width="5%" align="center" height="25"><div align="center">2</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2017-04-05　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-01-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-03-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=1"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="list-head-bg">
+  <input type="hidden" id="xx" value="2017-04-01======">
+    <td width="5%" align="center" height="25"><div align="center">3</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2017-07-10　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-04-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-06-30　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=2"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="">
+  <input type="hidden" id="xx" value="2017-07-01======">
+    <td width="5%" align="center" height="25"><div align="center">4</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2017-10-22　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-07-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-09-30　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=3"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="list-head-bg">
+  <input type="hidden" id="xx" value="2017-10-01======">
+    <td width="5%" align="center" height="25"><div align="center">5</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2018-01-14　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-10-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2017-12-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=4"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="">
+  <input type="hidden" id="xx" value="2018-01-01======">
+    <td width="5%" align="center" height="25"><div align="center">6</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2018-04-15　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-01-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-03-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=5"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="list-head-bg">
+  <input type="hidden" id="xx" value="2018-04-01======">
+    <td width="5%" align="center" height="25"><div align="center">7</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2018-07-13　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-04-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-06-30　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=6"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="">
+  <input type="hidden" id="xx" value="2018-07-01======">
+    <td width="5%" align="center" height="25"><div align="center">8</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2018-10-19　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-07-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-09-30　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=7"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="list-head-bg">
+  <input type="hidden" id="xx" value="2018-10-01======">
+    <td width="5%" align="center" height="25"><div align="center">9</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2019-01-13　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-10-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2018-12-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=8"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+  <tr class="">
+  <input type="hidden" id="xx" value="2019-01-01======">
+    <td width="5%" align="center" height="25"><div align="center">10</div></td>
+    <td width="25%" align="center" ><div align="center">《增值税纳税申报表（小规模纳税人适用）》 </div></td>
+    <td width="12%" align="center" ><div align="center">2019-04-10　</div></td>
+    <td width="12%" align="center" ><div align="center">2019-01-01　</div></td>
+    <td width="12%" align="center" ><div align="center">2019-03-31　</div></td>
+    <td width="12%" align="right" ><div align="right">0　</div></td> 
+    <td width="15%" align="right" ><div align=center><a href="print_nssbb_zzfw.jsp?k=9"  target="_blank" class=a04><b>查看打印明细</a></div></td>   
+  </tr>
+
+<tr>
+
+</tr>
+</table>
+</body>
+</html> 																																																																																																																																																																																																																																																																																									

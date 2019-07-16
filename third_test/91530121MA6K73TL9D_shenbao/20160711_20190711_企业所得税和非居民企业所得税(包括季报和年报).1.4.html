@@ -1,0 +1,544 @@
+﻿<!DOCTYPE HTML>
+
+
+
+<META http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../css/print.css" type="text/css">
+<link rel="stylesheet" href="../css/wssb.css" type="text/css">
+<meta http-equiv="Content-Language" content="GBK">
+<meta http-equiv="content-type" content="text/html; charset=GBK">
+
+
+
+<html>
+<head>
+<title>不征税收入和税基类减免应纳税所得额明细表</title>
+
+<script language="javascript">
+window.onerror = handle_error;
+
+function handle_error(message, url, line){
+	return true;
+}
+
+
+function isreal(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function convert(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function IsNumber(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if(string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false;
+	}
+	if(i_blank==0) {
+		return false;
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false; 
+	}
+	else {
+		return true; 
+	}
+}
+function IsDate(string)
+{
+ var b_rtn=true;
+ var i_ln;
+ var sub_rq;  
+ var str_rq;
+  if(string.length!=8)
+ {
+   return false;
+ }
+ for(var i=0;i<8;i++)
+ {
+   sub_rq=string.substring(i,i+1);
+   str_rq=String(sub_rq);
+   if(!IsNumber(str_rq))
+   {
+    b_rtn=false;
+    return b_rtn;
+   }
+ }
+ var sub_mm1=string.substring(4,6);
+ var sub_day1=string.substring(6,8);
+ 
+ var sub_mm=parseInt(sub_mm1,10);
+ var sub_day=parseInt(sub_day1,10);
+ if(sub_mm<1||sub_mm>12)
+  {
+    b_rtn=false;
+    return b_rtn;
+   }
+ if(sub_day<1||sub_day>31)
+  {
+    b_rtn=false;
+    return b_rtn;
+  }
+
+  return b_rtn;
+}
+function IsInt(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if (string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false; 
+	}
+	if(i_blank==0) {
+		return false; 
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false;
+	}
+	else {
+		if(number>=0) {
+			var dotlst=string.indexOf(".");
+			if(dotlst==-1) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+function enterdown (column) {
+	try{
+		var columnobject =column;
+		var obj = document.form1.elements[columnobject];
+		if (event.keyCode==13 && (obj!=null)) {
+			if ((obj.type=="text") && (!obj.disabled)) {
+				obj.focus();
+				obj.select();
+			}
+		}
+	}catch(e){
+	}
+}
+
+function changSE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	}	
+}
+
+function changJE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	  JEcol.value="0.00";
+	}	
+}
+//?é?¤String??????????????×?·?
+function checkString(str)
+{
+	var reStr = /[???????·????<<>>&??]/;
+	var str1=str.value
+	if(str1.match(reStr))
+	{
+		alert('×?·?????????????<,>,&??????×?·???');
+		str.value="";
+		return false;
+	}
+	else
+	{
+		//alert('×?·???·??????ó??');
+		return true;
+	}
+}
+
+String.prototype.trim = function() { 
+return this.replace(/(^\s*)|(\s*$)/g, ""); 
+} 
+ 
+String.prototype.ltrim = function() { 
+return this.replace(/(^\s*)/g, ""); 
+} 
+ 
+String.prototype.rtrim = function() { 
+return this.replace(/(\s*$)/g, ""); 
+} 
+
+</script>
+<script type="text/javascript" src="../jquery1.5/jquery-1.5.2.min.js"></script>
+<body marginwidth="0" marginheight="0"  topmargin="0" >
+<OBJECT  id="factory" style="DISPLAY:  none"  codeBase="../ScriptX.cab#Version=5,60,0,360"  classid="clsid:1663ed61-23eb-11d2-b92f-008048fdd814"  viewastext></OBJECT>
+<object id="button" style="DISPLAY:  none" classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></object>
+<script language="JavaScript">
+function doprint() {
+  factory.printing.header = ""
+  factory.printing.footer = ""
+  factory.printing.leftMargin  =  0
+  factory.printing.topMargin  =  0
+  factory.printing.rightMargin  =  0
+  factory.printing.bottomMargin  =  0
+  factory.printing.portrait = false
+  document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+  factory.printing.Print(false);
+  document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+ }
+ function printsetup(){ 
+　　// 打印页面设置 
+　　factory.printing.PageSetup(); 
+　　} 
+ function printpreview(){ 
+　　// 打印页面预览
+    factory.printing.header = ""
+    factory.printing.footer = ""
+    factory.printing.leftMargin  =  0
+    factory.printing.topMargin  =  0
+    factory.printing.rightMargin  =  0
+    factory.printing.bottomMargin  =  0
+    factory.printing.portrait = false
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+　　factory.printing.Preview();
+    document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function saveas(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　document.all.button.ExecWB(4,1);
+    //document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function hide(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　//document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+ var SF=1,SF1=0.1,Max=3;
+</script>
+<div id="printbtn" align="center" style="DISPLAY:">
+<INPUT  type="button" name="Button" value="放大" onClick="if(SF<Max){SF+=SF1;MyDiv.style.zoom=SF;}"  align="middle">
+<INPUT onClick="if(SF>SF1){SF-=SF1;MyDiv.style.zoom=SF;}" type="button" name="Button" value="缩小" align="middle"> 
+<INPUT onclick=javascript:doprint() type="button" name="Button" value="打印" align="middle">
+<INPUT onclick=javascript:printsetup(); type="button" name="Button" value="打印设置" align="middle"> 
+<INPUT onclick=javascript:printpreview(); type="button" name="Button" value="打印预览" align="middle">
+<!--<input type="button" name="Button" value="另存为" onClick="javascript:saveas()">   --> 
+<input type="button" name="Button" value="隐藏" onClick="javascript:hide()"> 
+</div>
+<Div id="MyDiv"> 
+</head>
+
+
+ 
+
+<body onLoad="init()">
+<form name="form1" method="POST" > 
+<table width="780" border="0" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1" >
+  <tr >
+    <td  colspan="6" ><div class="mypop2" align="center"><b>中华人民共和国企业所得税月(季)度预缴纳税申报表(A类，2015年版)附表3 </b></div></td>
+  </tr>
+  <tr >
+    <td  colspan="6" ><div class="mypop2" align="center"><b>减免所得税额明细表 </b></div></td>
+  </tr>
+  <tr >
+    <td  colspan="6" align="right" ><p >金额单位:&nbsp;&nbsp;&nbsp;人民币元(列至角分) </p></td>
+  </tr>
+</table>
+ <table width="800" border="1" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1"   id="tabList" >
+
+  <tr >
+    <td width="50" align="center"  ><p >行次 </p></td>
+    <td width="412" colspan="2" align="center" ><p >项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目 </p></td>
+    <td width="94" align="center"  >本期金额</td>
+    <td width="98" align="center"  >累计金额</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >1 </p></td>
+    <td width="412"  colspan="2"><p >合计（2行+4行+5行+6行）</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >2 </p></td>
+    <td width="412"  colspan="2" ><p >一、符合条件的小型微利企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >3 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;&nbsp;其中：减半征税</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >4 </p></td>
+    <td width="412"  colspan="2"><p >二、国家需要重点扶持的高新技术企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >5 </p></td>
+    <td width="412"  colspan="2" ><p >三、减免地方分享所得税的民族自治地方企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >6 </p></td>
+    <td width="412"  colspan="2" ><p >四、其他专项优惠（7行+8行+9行+&#8230;30行）</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >7 </p></td>
+    <td width="412"  colspan="2"><p >&nbsp;&nbsp;&nbsp;（一）经济特区和上海浦东新区新设立的高新技术企业</p></td>
+    <td width="94" align="right" >0</td>
+	<td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >8 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（二）经营性文化事业单位转制企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >9 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（三）动漫企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >10 </p></td>
+    <td width="412"  colspan="2"><p >&nbsp;&nbsp;&nbsp;（四）受灾地区损失严重的企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >11 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（五）受灾地区农村信用社 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >12 </p></td>
+    <td   colspan="2" ><p >&nbsp;&nbsp;&nbsp;（六）受灾地区的促进就业企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >13 </p></td>
+    <td  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（七）技术先进型服务企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >14 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（八）新疆困难地区新办企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >15 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（九）新疆喀什、霍尔果斯特殊经济开发区新办企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >16 </p></td>
+    <td width="412"   colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十）支持和促进重点群体创业就业企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >17 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十一）集成电路线宽小于0.8微米（含）的集成电路生产企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >18 </p></td>
+    <td  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十二）集成电路线宽小于0.25微米的集成电路生产企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >19 </p></td>
+    <td width="412"   colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十三）投资额超过80亿元人民币的集成电路生产企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >20 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十四）新办集成电路设计企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >21 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十五）国家规划布局内重点集成电路设计企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >22 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十六）符合条件的软件企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >23 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十七）国家规划布局内重点软件企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >24 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十八）设在西部地区的鼓励类产业企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >25 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（十九）符合条件的生产和装配伤残人员专门用品企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >26 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（二十）中关村国家自主创新示范区从事文化产业支撑技术等领域的高新技术企业</p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >27 </p></td>
+    <td width="412"  colspan="2" ><p >&nbsp;&nbsp;&nbsp;（二十一）享受过渡期税收优惠企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >28 </p></td>
+    <td colspan="2"  ><p >&nbsp;&nbsp;&nbsp;（二十二）横琴新区、平潭综合实验区和前海深港现代化服务业合作区企业 </p></td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+  </tr>
+  
+  <tr >
+    <td width="50" align="center"  ><p >29 </p></td>
+    <td width="412"  ><p >&nbsp;&nbsp;&nbsp;&nbsp;其他1： </p></td>
+    <td width="305"  >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	
+	
+  </tr>
+  <tr >
+    <td width="50" align="center"  ><p >30 </p></td>
+    <td width="412"  >&nbsp;&nbsp;&nbsp;&nbsp;其他2：</td>
+    <td width="305"  >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	 	
+  </tr>
+  
+  
+ <tr >
+    <td width="50" align="center"  ><span id='xh' name='xh' >29</span></td>
+    <td width="107"  >&nbsp;&nbsp;&nbsp;&nbsp;其他<span id='xmxh' name='xmxh' >29</span>：</td>
+    <td width="305" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	<input type="hidden" name="row29_temp" value="0">
+  </tr> 
+ 
+ <tr >
+    <td width="50" align="center"  ><span id='xh' name='xh' >30</span></td>
+    <td width="107"  >&nbsp;&nbsp;&nbsp;&nbsp;其他<span id='xmxh' name='xmxh' >30</span>：</td>
+    <td width="305" >&nbsp;</td>
+    <td width="94" align="right" >0</td>
+    <td width="98" align="right" >0</td>
+	<input type="hidden" name="row29_temp" value="0">
+  </tr> 
+   
+  
+  
+</table>
+
+  </form>
+   </div>
+</body>
+</html>
+  

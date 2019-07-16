@@ -1,0 +1,782 @@
+﻿<!DOCTYPE HTML>
+
+
+
+<META http-equiv="Content-Style-Type" content="text/css">
+<link rel="stylesheet" href="../css/print.css" type="text/css">
+<link rel="stylesheet" href="../css/wssb.css" type="text/css">
+<meta http-equiv="Content-Language" content="GBK">
+<meta http-equiv="content-type" content="text/html; charset=GBK">
+
+
+
+<html>
+
+<head>
+<title>固定资产加速折旧、扣除明细表</title>
+
+<script language="javascript">
+window.onerror = handle_error;
+
+function handle_error(message, url, line){
+	return true;
+}
+
+
+function isreal(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function convert(thestr) {
+	if ((thestr=="0.00")||(thestr=="0")||(thestr=='')) {
+		return 0;
+	}
+	var dotlst=thestr.indexOf(".");
+	var dotend=thestr.length;
+	if ((dotlst==-1)||(dotend - dotlst<=3)) {
+		return thestr;
+	}
+	else {
+		var dot2nd=thestr.indexOf(".");
+		var intpart=thestr.substring(0, dot2nd+3);
+		var decpart=thestr.substring(dot2nd+3,dot2nd+4);
+		if(parseInt(decpart)>=5) {
+			decpart="0.01";
+			var thestr1=parseFloat(intpart);
+			if(thestr1>0) {
+				thestr1=thestr1+parseFloat(decpart);
+			}
+			else {
+				thestr1=thestr1-parseFloat(decpart);
+			}
+			thestr=String(thestr1).substring(0,dot2nd+3);
+		}
+		else {
+			thestr=intpart;
+		}
+		return thestr;
+	}
+}
+
+function IsNumber(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if(string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false;
+	}
+	if(i_blank==0) {
+		return false;
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false; 
+	}
+	else {
+		return true; 
+	}
+}
+function IsDate(string)
+{
+ var b_rtn=true;
+ var i_ln;
+ var sub_rq;  
+ var str_rq;
+  if(string.length!=8)
+ {
+   return false;
+ }
+ for(var i=0;i<8;i++)
+ {
+   sub_rq=string.substring(i,i+1);
+   str_rq=String(sub_rq);
+   if(!IsNumber(str_rq))
+   {
+    b_rtn=false;
+    return b_rtn;
+   }
+ }
+ var sub_mm1=string.substring(4,6);
+ var sub_day1=string.substring(6,8);
+ 
+ var sub_mm=parseInt(sub_mm1,10);
+ var sub_day=parseInt(sub_day1,10);
+ if(sub_mm<1||sub_mm>12)
+  {
+    b_rtn=false;
+    return b_rtn;
+   }
+ if(sub_day<1||sub_day>31)
+  {
+    b_rtn=false;
+    return b_rtn;
+  }
+
+  return b_rtn;
+}
+function IsInt(string) { 
+	var number; 
+	var i_blank=string.indexOf(" ");
+	if (string==null) {
+		return false;
+	}
+	if(string.length==0) {
+		return false; 
+	}
+	if(i_blank==0) {
+		return false; 
+	}
+	number = new Number(string); 
+	if(isNaN(number)) {
+		return false;
+	}
+	else {
+		if(number>=0) {
+			var dotlst=string.indexOf(".");
+			if(dotlst==-1) {
+				return true;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+function enterdown (column) {
+	try{
+		var columnobject =column;
+		var obj = document.form1.elements[columnobject];
+		if (event.keyCode==13 && (obj!=null)) {
+			if ((obj.type=="text") && (!obj.disabled)) {
+				obj.focus();
+				obj.select();
+			}
+		}
+	}catch(e){
+	}
+}
+
+function changSE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	}	
+}
+
+function changJE (JEcol,SEcol) {
+	
+	var JE=parseFloat(JEcol.value);
+	var SE=parseFloat(SEcol.value);
+	if (JE<0) JE = 0 - JE;
+	if (SE<0) SE = 0 - SE;
+	if( (JE*0.18)<SE )
+	{
+	  alert("?°????????????????17%????????????!");
+	  SEcol.value="0.00";
+	  JEcol.value="0.00";
+	}	
+}
+//?é?¤String??????????????×?·?
+function checkString(str)
+{
+	var reStr = /[???????·????<<>>&??]/;
+	var str1=str.value
+	if(str1.match(reStr))
+	{
+		alert('×?·?????????????<,>,&??????×?·???');
+		str.value="";
+		return false;
+	}
+	else
+	{
+		//alert('×?·???·??????ó??');
+		return true;
+	}
+}
+
+String.prototype.trim = function() { 
+return this.replace(/(^\s*)|(\s*$)/g, ""); 
+} 
+ 
+String.prototype.ltrim = function() { 
+return this.replace(/(^\s*)/g, ""); 
+} 
+ 
+String.prototype.rtrim = function() { 
+return this.replace(/(\s*$)/g, ""); 
+} 
+
+</script>
+<link rel="stylesheet" type="text/css" href="..\css\wssb.css" />
+<link rel="stylesheet" type="text/css" href="..\css\print.css" />
+<script type="text/javascript" src="../jquery1.5/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="./javascript/sb_jdsds_2014_gdzc_zjyj.js"></script>
+</head>
+<script>
+/******开始构建列数组*******/
+/******ckai思路:将数组都归属到json对象的属性上面,且命名以‘列col’为取名要素,方便下面循环时直接以列名取值*******/
+var jsonArrayObj={};
+var trArray1= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr1=trArray1
+
+var trArray2= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr2=trArray2
+
+var trArray3= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr3=trArray3
+
+var trArray4= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr4=trArray4
+
+var trArray5= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr5=trArray5
+
+var trArray6= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr6=trArray6
+
+var trArray7= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr7=trArray7
+
+var trArray8= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr8=trArray8
+
+var trArray9= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr9=trArray9
+
+var trArray10= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr10=trArray10
+
+var trArray11= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr11=trArray11
+
+var trArray12= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr12=trArray12
+
+var trArray13= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr13=trArray13
+
+var trArray14= new Array("0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","","0????","");
+jsonArrayObj.tr14=trArray14
+
+</script>
+
+<script>
+ $(
+  function(){   //第一步去掉全部的背景色
+                  $("td").each(
+				     function(){
+					    if(($(this).attr("bgcolor"))!="")
+						{
+							$(this).css("background","#ffffff");//
+						}
+					 }
+				  
+				  );
+				 //第二步将ID=tabList的table去掉样式同时为每个td设置样式为class="style_td" 同时要求每个td不带高度
+				 $("#tabList").removeClass("unnamed1");
+				 $("#tabList").addClass("style_tab");
+				 $("#tabList td").each(
+				    function(){
+					    $(this).addClass("style_td");
+						$(this).removeAttr("height");
+					}
+				 );
+				  var cols=new Array('fwjzw_yz','fwjzw_bqzj','fwjzw_ljzj','jqsb_yz','jqsb_bqzj','jqsb_ljzj','hj_yz','hj_bqzj_kjzj','hj_bqzj_zczj','hj_bqzj_jszj','hj_bqzj_nstze','hj_bqzj_jszjyhtje','hj_ljzj_kjzj','hj_ljzj_zczj','hj_ljzj_jszj','hj_ljzj_nstze','hj_ljzj_jszjyhtje','hyzl_dm','qylx','zyly_hydm');
+				  var rows=new Array('tr1','tr2','tr3','tr4','tr5','tr6','tr7','tr8','tr9','tr10','tr11','tr12','tr13','tr14');
+				  $(rows).each(function()
+					{
+					  var name=this;
+					  $(cols).each(function(i)
+										 {
+										    var colObj=$("input[name='"+name+"_"+this+"']");
+											$(colObj).css("display","none");//不占据空间
+									         var textValue=""==$(jsonArrayObj[name]).get(i)?" ":$(jsonArrayObj[name]).get(i);
+											if(($(colObj).parent().text()).indexOf("*")==-1)
+									           $(colObj).parent().text(textValue);
+										 }
+									); 
+					}); 
+		    }		
+  );
+</script>
+<body style="padding:0 10 0 10; ">
+<OBJECT  id="factory" style="DISPLAY:  none"  codeBase="../ScriptX.cab#Version=5,60,0,360"  classid="clsid:1663ed61-23eb-11d2-b92f-008048fdd814"  viewastext></OBJECT>
+<object id="button" style="DISPLAY:  none" classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2"></object>
+<script language="JavaScript">
+function doprint() {
+  factory.printing.header = ""
+  factory.printing.footer = ""
+  factory.printing.leftMargin  =  0
+  factory.printing.topMargin  =  0
+  factory.printing.rightMargin  =  0
+  factory.printing.bottomMargin  =  0
+  factory.printing.portrait = false
+  document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+  factory.printing.Print(false);
+  document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+ }
+ function printsetup(){ 
+　　// 打印页面设置 
+　　factory.printing.PageSetup(); 
+　　} 
+ function printpreview(){ 
+　　// 打印页面预览
+    factory.printing.header = ""
+    factory.printing.footer = ""
+    factory.printing.leftMargin  =  0
+    factory.printing.topMargin  =  0
+    factory.printing.rightMargin  =  0
+    factory.printing.bottomMargin  =  0
+    factory.printing.portrait = false
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+　　factory.printing.Preview();
+    document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function saveas(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　document.all.button.ExecWB(4,1);
+    //document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+function hide(){ 
+　　// 打印页面另存为
+    document.all("printbtn").style.visibility = 'hidden';//打印时隐藏打印按钮 
+    document.all("printbtn").style.display = 'none';//打印时隐藏打印按钮 
+　　//document.all("printbtn").style.visibility = 'visible';//打印完显示打印按钮 
+　　}
+ var SF=1,SF1=0.1,Max=3;
+</script>
+<div id="printbtn" align="center" style="DISPLAY:">
+<INPUT  type="button" name="Button" value="放大" onClick="if(SF<Max){SF+=SF1;MyDiv.style.zoom=SF;}"  align="middle">
+<INPUT onClick="if(SF>SF1){SF-=SF1;MyDiv.style.zoom=SF;}" type="button" name="Button" value="缩小" align="middle"> 
+<INPUT onclick=javascript:doprint() type="button" name="Button" value="打印" align="middle">
+<INPUT onclick=javascript:printsetup(); type="button" name="Button" value="打印设置" align="middle"> 
+<INPUT onclick=javascript:printpreview(); type="button" name="Button" value="打印预览" align="middle">
+<!--<input type="button" name="Button" value="另存为" onClick="javascript:saveas()">   --> 
+<input type="button" name="Button" value="隐藏" onClick="javascript:hide()"> 
+</div>
+<Div id="MyDiv">  
+<div align="center">
+<body>
+<table border="0" width="1242" align="center">  
+  <tr>
+    <td width="1613" colspan="3">
+      <div class="mypop2" align="center"><b>固定资产加速折旧(扣除)预缴情况统计表</b></div></td>
+  </tr>
+</table>
+<table width="1242" border="0" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1" >
+  <tr>
+    <td height="22"  align="center" colspan="3" >所属时间:2017年04月01日 至 2017年06月30日</td>
+  </tr>
+  <tr>
+    <td width="33%" height="22"  align="left">纳税人识别号:91530121MA6K73TL9D</td>
+	<td width="33%" height="22"  align="center">纳税人名称:云南长青安茶业有限公司</td>
+    <td width="33%" height="22"  align="right">所属行业:其他未列明批发业</td>
+  </tr>
+  </table>
+  <table border="0" width="1613" >
+    <tr>
+    <td width="100%" height="22"  align="right" colspan="3"> 金额单位:   人民币元(列至角分)</td>
+  </tr>
+  </table>
+
+ <table width="1613" border="1" cellspacing="0" cellpadding="0" bordercolorlight="#000000" bordercolordark="#FFFFFF" align="center" class="unnamed1"   id="tabList" >
+   <tr>
+    <td width="21"    rowspan="4"  align="center" bgcolor="#DFDFDF">行次</td>
+    <td   rowspan="4"  align="center"colspan="2" bgcolor="#DFDFDF">项目</td>
+    <td colspan="3"   align="center" bgcolor="#DFDFDF">房屋、建筑物</td>
+    <td colspan="3"   align="center" bgcolor="#DFDFDF">机器设备和其他固定资产</td>
+    <td colspan="11"   align="center" bgcolor="#DFDFDF">合计</td>
+  </tr>
+
+  <tr>
+    <td width="78"  rowspan="2"   align="center" bgcolor="#DFDFDF">原值</td>
+    <td colspan="2"   align="center" bgcolor="#DFDFDF">税收折旧（扣除）额</td>
+    <td width="72" rowspan="2"   align="center" bgcolor="#DFDFDF">原值</td>
+    <td colspan="2"   align="center" bgcolor="#DFDFDF">税收折旧（扣除）额</td>
+    <td width="74" rowspan="2"   align="center" bgcolor="#DFDFDF">原值</td>
+    <td colspan="5"  align="center" bgcolor="#DFDFDF" >本期折旧（扣除）额</td>
+    <td colspan="5"   align="center" bgcolor="#DFDFDF">累计折旧（扣除）额</td>
+  </tr>
+  <tr>
+    <td   align="center" bgcolor="#DFDFDF">本期</td>
+    <td   align="center" bgcolor="#DFDFDF">累计</td>
+    <td   align="center" bgcolor="#DFDFDF">本期</td>
+    <td   align="center" bgcolor="#DFDFDF">累计</td>
+    <td  align="center" bgcolor="#DFDFDF" > 会计折旧额 </td>
+    <td  align="center" bgcolor="#DFDFDF" > 正常折旧额 </td>
+    <td  align="center" bgcolor="#DFDFDF" > 税收旧额 </td>
+    <td  align="center" bgcolor="#DFDFDF" > 纳税调整额 </td>
+    <td  align="center" bgcolor="#DFDFDF" > 加速折旧优惠统计额 </td>
+    <td   align="center" bgcolor="#DFDFDF"> 会计折旧额 </td>
+    <td   align="center" bgcolor="#DFDFDF"> 正常折旧额 </td>
+    <td   align="center" bgcolor="#DFDFDF"> 税收折旧额 </td>
+    <td   align="center" bgcolor="#DFDFDF"> 纳税调整额 </td>
+    <td   align="center" bgcolor="#DFDFDF"> 加速折旧优惠统计额 </td>
+  </tr>
+     <tr>
+       <td  align="center" bgcolor="#DFDFDF" >1</td>
+       <td width="75" align="center" bgcolor="#DFDFDF" >2</td>
+       <td width="77" align="center" bgcolor="#DFDFDF" >3</td>
+       <td align="center" bgcolor="#DFDFDF" >4</td>
+       <td width="73" align="center" bgcolor="#DFDFDF" >5</td>
+       <td width="76" align="center" bgcolor="#DFDFDF" >6</td>
+       <td align="center" bgcolor="#DFDFDF" >7</td>
+       <td align="center" bgcolor="#DFDFDF" >8</td>
+       <td align="center" bgcolor="#DFDFDF">9</td>
+       <td align="center" bgcolor="#DFDFDF" >10</td>
+       <td align="center" bgcolor="#DFDFDF" >11</td>
+       <td align="center" bgcolor="#DFDFDF" >12</td>
+       <td align="center" bgcolor="#DFDFDF" >13</td>
+       <td align="center" bgcolor="#DFDFDF" >14</td>
+       <td align="center" bgcolor="#DFDFDF" >15</td>
+       <td align="center" bgcolor="#DFDFDF" >16</td>
+       <td align="center" bgcolor="#DFDFDF" >17</td>
+     </tr>
+	<tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">1</td>
+		<td bgcolor="#DFDFDF" colspan="2"> 一、重要行业固定资产 </td>
+		<td><input type="text" name="tr1_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr1_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr1_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr1_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr1_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr1_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr1_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr1_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr1_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr1_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr1_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr1_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr>  
+   <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">2</td>
+	   <td width="115"  rowspan="2"> <input type="text" name="tr2_hyzl_dm"   value="" size="15" class="sp" disabled></td>
+	   <td width="149" bgcolor="#DFDFDF"> 税会处理一致 </td>
+		<td><input type="text" name="tr2_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr2_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp" disabled></td>
+		<td width="83" align="center">*<input type="hidden" name="tr2_hj_bqzj_kjzj"   value="0"></td>
+		<td width="70"><input type="text" name="tr2_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="85"><input type="text" name="tr2_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76" align="center">*<input type="hidden" name="tr2_hj_bqzj_nstze"   value="0"></td>
+		<td width="72"><input type="text" name="tr2_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77" align="center">*<input type="hidden" name="tr2_hj_ljzj_kjzj"   value="0"></td>
+		<td width="77"><input type="text" name="tr2_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70"><input type="text" name="tr2_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr2_hj_ljzj_nstze"   value="0"></td>
+		<td width="79"><input type="text" name="tr2_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+  </tr>   
+  <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">3</td>
+	   <td bgcolor="#DFDFDF" > 税会处理不一致 </td>
+		<td><input type="text" name="tr3_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr3_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr3_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp" ></td>
+		<td width="70" align="center">*<input type="hidden" name="tr3_hj_bqzj_zczj"   value="0"></td>
+		<td width="85"><input type="text" name="tr3_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr3_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr3_hj_bqzj_jszjyhtje"   value="0"></td>
+		<td width="77"><input type="text" name="tr3_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="77" align="center">*<input type="hidden" name="tr3_hj_ljzj_zczj"   value="0" ></td>
+		<td width="70"><input type="text" name="tr3_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr3_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79" align="center">*<input type="hidden" name="tr3_hj_ljzj_jszjyhtje"   value="0"></td>
+  </tr>   
+	<tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">4</td>
+		<td bgcolor="#DFDFDF" colspan="2"> 二、其他行业研发设备加速折旧 </td>
+		<td align="center">*<input type="hidden" name="tr4_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr4_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr4_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr4_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr4_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr4_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr4_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr4_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr4_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr4_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr4_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr4_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr4_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr4_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr4_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr4_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr4_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr>  
+<tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">5</td>
+      <td width="115"  rowspan="2" bgcolor="#DFDFDF">单价100万元以上的研发仪器 </td>
+	   <td width="149" bgcolor="#DFDFDF"> 税会处理一致 </td>
+		<td align="center">*<input type="hidden" name="tr5_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr5_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr5_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr5_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr5_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr5_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr5_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+        <td width="83" align="center">*<input type="hidden" name="tr5_hj_bqzj_kjzj"   value="0"></td>
+		<td width="70"><input type="text" name="tr5_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp" ></td>
+		<td width="85"><input type="text" name="tr5_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76" align="">*<input type="hidden" name="tr5_hj_bqzj_nstze"   value="0"></td>
+		<td width="72"><input type="text" name="tr5_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77" align="center">*<input type="hidden" name="tr5_hj_ljzj_kjzj"   value="0"></td>
+		<td width="77"><input type="text" name="tr5_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70"><input type="text" name="tr5_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr5_hj_ljzj_nstze"   value="0"></td>
+		<td width="79"><input type="text" name="tr5_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+  </tr>   
+  <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">6</td>
+	   <td bgcolor="#DFDFDF" > 税会处理不一致 </td>
+		<td align="center">*<input type="hidden" name="tr6_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr6_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr6_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr6_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr6_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr6_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr6_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr6_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70" align="center">*<input type="hidden" name="tr6_hj_bqzj_zczj"   value="0"></td>
+		<td width="85"><input type="text" name="tr6_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr6_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr6_hj_bqzj_jszjyhtje"   value="0"></td>
+		<td width="77"><input type="text" name="tr6_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="77" align="center">*<input type="hidden" name="tr6_hj_ljzj_zczj"   value="0" ></td>
+		<td width="70"><input type="text" name="tr6_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr6_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79" align="center">*<input type="hidden" name="tr6_hj_ljzj_jszjyhtje"   value="0"></td>
+  </tr>
+   <tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">7</td>
+		<td bgcolor="#DFDFDF" colspan="2"> 三、允许一次性扣除的固定资产</td>
+		<td align="center">*<input type="hidden" name="tr7_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr7_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr7_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr7_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr7_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr7_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr7_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr7_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr7_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr7_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr7_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr7_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr7_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr7_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr7_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr7_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr7_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr>    
+   <tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">8</td>
+		<td bgcolor="#DFDFDF" colspan="2"> （一）单位价值不超过100万元的研发仪器</td>
+		<td align="center">*<input type="hidden" name="tr8_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr8_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr8_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr8_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr8_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr8_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr8_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr8_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr8_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr8_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr8_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr8_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr8_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr8_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr8_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr8_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr8_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr> 
+<tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">9</td>
+	   <td width="115"  rowspan="2"> <input type="text" name="tr9_qylx"   value="" size="15" class="sp" disabled></td>
+	   <td width="149" bgcolor="#DFDFDF"> 税会处理一致 </td>
+		<td align="center">*<input type="hidden" name="tr9_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr9_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr9_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr9_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr9_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr9_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr9_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83" align="center">*<input type="hidden" name="tr9_hj_bqzj_kjzj"   value="0"></td>
+		<td width="70"><input type="text" name="tr9_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="85"><input type="text" name="tr9_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76" align="center">*<input type="hidden" name="tr9_hj_bqzj_nstze"   value="0"></td>
+		<td width="72"><input type="text" name="tr9_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77" align="center">*<input type="hidden" name="tr9_hj_ljzj_kjzj"   value="0"></td>
+		<td width="77"><input type="text" name="tr9_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70"><input type="text" name="tr9_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr9_hj_ljzj_nstze"   value="0"></td>
+		<td width="79"><input type="text" name="tr9_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+  </tr>   
+  <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">10</td>
+	   <td bgcolor="#DFDFDF" > 税会处理不一致 </td>
+		<td align="center">*<input type="hidden" name="tr10_fwjzw_yz"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr10_fwjzw_bqzj"   value="0" size="10"></td>
+		<td align="center">*<input type="hidden" name="tr10_fwjzw_ljzj"   value="0" size="10"></td>
+		<td><input type="text" name="tr10_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr10_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr10_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr10_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr10_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70" align="center">*<input type="hidden" name="tr10_hj_bqzj_zczj"   value="0"></td>
+		<td width="85"><input type="text" name="tr10_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr10_hj_bqzj_nstze"   value="0"  size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr10_hj_bqzj_jszjyhtje"   value="0"></td>
+		<td width="77"><input type="text" name="tr10_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="77" align="center">*<input type="hidden" name="tr10_hj_ljzj_zczj"   value="0" ></td>
+		<td width="70"><input type="text" name="tr10_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr10_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79" align="center">*<input type="hidden" name="tr10_hj_ljzj_jszjyhtje"   value="0"></td>
+  </tr> 
+   <tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">11</td>
+		<td bgcolor="#DFDFDF" colspan="2"> （二）5000元以下固定资产</td>
+		<td><input type="text" name="tr11_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr11_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr11_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr11_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr11_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr11_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr11_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr11_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr11_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr11_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr11_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr11_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr> 
+   <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">12</td>
+	   <td width="115"  rowspan="2" align="center">*</td>
+	   <td width="149" bgcolor="#DFDFDF"> 税会处理一致 </td>
+		<td><input type="text" name="tr12_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr12_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83" align="center">*<input type="hidden" name="tr12_hj_bqzj_kjzj"   value="0"></td>
+		<td width="70"><input type="text" name="tr12_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="85"><input type="text" name="tr12_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76" align="center">*<input type="hidden" name="tr12_hj_bqzj_nstze"   value="0"></td>
+		<td width="72"><input type="text" name="tr12_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77" align="center">*<input type="hidden" name="tr12_hj_ljzj_kjzj"   value="0"></td>
+		<td width="77"><input type="text" name="tr12_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70"><input type="text" name="tr12_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr12_hj_ljzj_nstze"   value="0"></td>
+		<td width="79"><input type="text" name="tr12_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+  </tr>   
+  <tr>
+	   <td width="21"  align="center" bgcolor="#DFDFDF">13</td>
+	   <td bgcolor="#DFDFDF" > 税会处理不一致 </td>
+		<td><input type="text" name="tr13_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td><input type="text" name="tr13_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr13_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="70" align="center">*<input type="hidden" name="tr13_hj_bqzj_zczj"   value="0"></td>
+		<td width="85"><input type="text" name="tr13_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="76" ><input type="text" name="tr13_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72" align="center">*<input type="hidden" name="tr13_hj_bqzj_jszjyhtje"   value="0"></td>
+		<td width="77"><input type="text" name="tr13_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"></td>
+		<td width="77" align="center">*<input type="hidden" name="tr13_hj_ljzj_zczj"   value="0" ></td>
+		<td width="70"><input type="text" name="tr13_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr13_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79" align="center">*<input type="hidden" name="tr13_hj_ljzj_jszjyhtje"   value="0"></td>
+  </tr>    
+  <tr>
+		<td width="21"  align="center" bgcolor="#DFDFDF">14</td>
+		<td bgcolor="#DFDFDF" colspan="2" align="center"> 合&nbsp;&nbsp;&nbsp; 计</td>
+		<td><input type="text" name="tr14_fwjzw_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_fwjzw_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_fwjzw_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_jqsb_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_jqsb_bqzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_jqsb_ljzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td><input type="text" name="tr14_hj_yz"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="83"><input type="text" name="tr14_hj_bqzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr14_hj_bqzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="85"><input type="text" name="tr14_hj_bqzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="76"><input type="text" name="tr14_hj_bqzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr14_hj_bqzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr14_hj_ljzj_kjzj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="77"><input type="text" name="tr14_hj_ljzj_zczj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="70"><input type="text" name="tr14_hj_ljzj_jszj"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="72"><input type="text" name="tr14_hj_ljzj_nstze"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+		<td width="79"><input type="text" name="tr14_hj_ljzj_jszjyhtje"   value="0" size="10" onBlur="moneyFormate2(this);checkall(this)" onKeyUp="enterdown('')" class="sp"  disabled></td>
+   </tr>  
+</table>                         
+<table  width="1613" align="center" >
+  <tr>
+     <td width="50%" >法人代表：（签章）	</td>										
+
+	 <td width="50%">填表人：	</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
+
